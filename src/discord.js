@@ -2,6 +2,7 @@
 
 const superagent = require('superagent');
 const users = require('./users.js');
+const fetch = require('node-fetch');
 
 /*
   Resources
@@ -43,34 +44,45 @@ async function exchangeCodeForToken(code) {
     client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET,
     grant_type: 'authorization_code',
-    redirect_uri: API_SERVER,
+    redirect_uri: 'http://localhost:3000/oauth',
     code: code,
     scope: 'identify',
   }
-  
+  let headers = {
+    'Content-Type':'application/x-www-form-urlencoded'
+  }
+  // fetch('https://discord.com/api/oauth2/token', {
+  //   method: 'POST',
+  //   body: new URLSearchParams(data),
+  //   headers: {
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   },
+  // })
+  // .then(res => res.json())
+  // .then(console.log)
   let tokenResponse = await superagent
   .post(tokenServerUrl)
-  .set('Content-Type', 'application/x-www-form-urlencoded')
+  .set(headers)
   .send(data);
-  
+  console.log(tokenResponse);
 
 let access_token = tokenResponse.body.access_token;
 return access_token;
 
 }
 
-// async function getRemoteUserInfo(token) {
+async function getRemoteUserInfo(token) {
 
-//   let userResponse =
-//     await superagent.get(remoteAPI)
-//       .set('user-agent', 'express-app')
-//       .set('Authorization', `token ${token}`)
+  let userResponse =
+    await superagent.get('https://discordapp.com/api/users/@me')
+      .set('user-agent', 'express-app')
+      .set('Authorization', `Bearer ${token}`)
 
-//   let user = userResponse.body;
+  let user = userResponse.body;
 
-//   return user;
+  return user;
 
-// }
+}
 
 async function getUser(remoteUser) {
   let userRecord = {
