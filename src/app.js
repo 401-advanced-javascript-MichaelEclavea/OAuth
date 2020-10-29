@@ -5,11 +5,11 @@ const express = require('express');
 const cors = require('cors');
 
 // Esoteric Resources
-const oauth = require('./github.js');
+const oauth = require('./discord.js');
 
 // Prepare the express app
 const app = express();
-
+app.use(express.json());
 // App Level MW
 app.use(cors());
 

@@ -7,30 +7,30 @@
 
 <body>
   <main>
-
-    <a id="oauth" href="#">Login</a>
+    <h1>Discord OAuth</h1>
+    <a id="oauth" href="https://discord.com/api/oauth2/authorize?client_id=771132186115702844&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Foauth&response_type=code&scope=identify">Discord</a>
 
   </main>
 
   <script>
 
-    let URL = "https://discord.com/api/oauth2/authorize";
+    // let URL = "https://discord.com/api/oauth2/authorize?client_id=771132186115702844&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&response_type=code&scope=identify";
 
-    let options = {
-      client_id: '771132186115702844',
-      redirect_uri: 'https://www.google.com/',
-      scope: 'identify',
-      state: 'asldfjdfs'
-    }
+    // let options = {
+    //   client_id: '771132186115702844',
+    //   redirect_uri: 'http://localhost:3000/',
+    //   scope: 'identify',
+    //   state: 'asldfjdfs'
+    // }
 
-    let QueryString = Object.keys(options).map((key) => {
-      return `${key}=` + encodeURIComponent(options[key]);
-    }).join("&");
+    // let QueryString = Object.keys(options).map((key) => {
+    //   return `${key}=` + encodeURIComponent(options[key]);
+    // }).join("&");
 
-    let authURL = `${URL}?${QueryString}`;
+    // let authURL = `${URL}?${QueryString}`;
 
-    let link = document.getElementById('oauth');
-    link.setAttribute('href', authURL);
+    // let link = document.getElementById('oauth');
+    // link.setAttribute('href', authURL);
 
   </script>
 
